@@ -1,21 +1,23 @@
 import Team from '../src/js/Team';
 
-const team = new Team();
-team.add('Лучник', 'Bowman', 50, 1, 40, 10);
-team.add('Мечник', 'Swordsman', 80, 1, 35, 25);
+const arrTeam = [
+  {
+    name: 'Лучник', type: 'Bowman', health: 50, level: 1, attack: 40, defence: 10,
+  },
+  {
+    name: 'Мечник', type: 'Swordsman', health: 80, level: 1, attack: 35, defence: 25,
+  },
+];
 
 describe('TESTS: Team', () => {
-  test('1', () => {
-    const character = team.characters[Symbol.iterator]();
+  test('iterates through the iterator', () => {
+    const team = new Team(arrTeam);
+    const arr = [];
 
-    expect(character.next().value).toEqual(team.characters[0]);
-  });
+    for (const i of team) {
+      arr.push(i);
+    }
 
-
-  test('2', () => {
-    const character = team.characters[Symbol.iterator]();
-
-    character.next();
-    expect(character.next().value).toEqual(team.characters[1]);
+    expect(arr).toEqual(arrTeam);
   });
 });

@@ -1,11 +1,16 @@
 export default class Team {
-  constructor() {
-    this.characters = [];
+  constructor(arr) {
+    this._characters = arr;
   }
 
-  add(name, type, health, level, attack, defence) {
-    this.characters.push({
-      name, type, health, level, attack, defence,
-    });
+  [Symbol.iterator]() {
+    let counter = 0;
+
+    return {
+      next: () => ({
+        value: this._characters[counter++],
+        done: !(counter <= this._characters.length),
+      }),
+    };
   }
 }
